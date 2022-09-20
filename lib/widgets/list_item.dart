@@ -1,18 +1,18 @@
-import 'package:figure_collections_maps/model/position.dart';
+import 'package:figure_collections_maps/model/persons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:geocoding/geocoding.dart';
 
-class ListItemVehicle extends StatefulWidget {
-  final Position position;
+class ListItemPerson extends StatefulWidget {
+  final Person person;
 
-  const ListItemVehicle(this.position, {super.key});
+  const ListItemPerson(this.person, {super.key});
 
   @override
-  State<ListItemVehicle> createState() => _ListItemVehicleState();
+  State<ListItemPerson> createState() => _ListItemPersonState();
 }
 
-class _ListItemVehicleState extends State<ListItemVehicle> {
+class _ListItemPersonState extends State<ListItemPerson> {
   TextStyle style15dp = const TextStyle(fontSize: 15);
   TextStyle style27dp = const TextStyle(fontSize: 27);
 
@@ -27,7 +27,7 @@ class _ListItemVehicleState extends State<ListItemVehicle> {
 
   getAddress() async {
     List<Placemark> listPlacemarks = await placemarkFromCoordinates(
-        widget.position.lat, widget.position.lng);
+        widget.person.lat, widget.person.long);
     setState(() {
       placemark = listPlacemarks[0];
     });
@@ -58,10 +58,8 @@ class _ListItemVehicleState extends State<ListItemVehicle> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.position.veiculo_placa.trim(),
+                    Text(widget.person.nome.trim(),
                         style: style27dp),
-                    Text(widget.position.condutor_nome ?? "-",
-                        style: style15dp),
                     Text(
                       placemark == null
                           ? "Buscando endereço..."
@@ -78,7 +76,7 @@ class _ListItemVehicleState extends State<ListItemVehicle> {
           ),
         ),
         onTap: () {
-          Navigator.pushNamed(context, "/mapa", arguments: widget.position);
+          Navigator.pushNamed(context, "/mapa", arguments: widget.person);
         },
       ),
     );
