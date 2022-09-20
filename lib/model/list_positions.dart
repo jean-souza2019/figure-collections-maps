@@ -1,15 +1,15 @@
-import 'package:figure_collections_maps/model/position.dart';
+import 'package:figure_collections_maps/model/persons.dart';
 
-class ListPositions {
-  List<Position> positions;
+class ListPersons {
+  List<Person> persons;
 
-  ListPositions(this.positions);
+  ListPersons(this.persons);
 
-  ListPositions.fromJson(Map<String, dynamic> json)
-      : positions = buildListPositions(json['data']);
+  ListPersons.fromJson(Map<String, dynamic> json)
+      : persons = buildListPersons(json['data']);
 
   //javascript = arrow function
   //java = lambda
-  static List<Position> buildListPositions(List<dynamic> list) =>
-      list.map((item) => Position.fromJson(item)).toList();
+  static List<Person> buildListPersons(List<dynamic> list) =>
+      list.map((item) => Person.fromJson(item)).toList();
 }
