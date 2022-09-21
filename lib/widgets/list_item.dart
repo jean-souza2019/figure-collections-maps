@@ -76,7 +76,7 @@ class _ListItemPersonState extends State<ListItemPerson> {
           ),
         ),
         onTap: () {
-          Navigator.pushNamed(context, "/mapa", arguments: widget.person);
+          Navigator.pushNamed(context, "/mapa", arguments: widget.person); // colocar outra tela
         },
       ),
     );

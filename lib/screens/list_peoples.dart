@@ -4,14 +4,14 @@ import 'package:figure_collections_maps/service/endpoints.dart';
 import 'package:figure_collections_maps/widgets/list_item.dart';
 import 'package:flutter/material.dart';
 
-class ListVehicles extends StatefulWidget {
-  const ListVehicles({Key? key}) : super(key: key);
+class ListPeoples extends StatefulWidget {
+  const ListPeoples({Key? key}) : super(key: key);
 
   @override
-  State<ListVehicles> createState() => _ListVehiclesState();
+  State<ListPeoples> createState() => _ListPeoplesState();
 }
 
-class _ListVehiclesState extends State<ListVehicles> {
+class _ListPeoplesState extends State<ListPeoples> {
   ListPersons? listPersons;
 
   @override
@@ -20,6 +20,7 @@ class _ListVehiclesState extends State<ListVehicles> {
     getPositions().then((dataResponse) {
       setState(() {
         listPersons = dataResponse;
+
       });
     });
   }
@@ -28,17 +29,16 @@ class _ListVehiclesState extends State<ListVehicles> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Veículos"),
+        title: const Text("Pessoas"),
         actions: [
           IconButton(
             icon: const Icon(Icons.map),
             onPressed: () {
-              Navigator.pushNamed(context, "/mapa", arguments: listPersons);
+              Navigator.pushNamed(context, "/mapa");
             },
           ),
         ],
       ),
-      //operador ternário
       body: listPersons == null
           ? const LinearProgressIndicator()
           : ListView.separated(
