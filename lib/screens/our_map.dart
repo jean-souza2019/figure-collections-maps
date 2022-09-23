@@ -1,104 +1,80 @@
-import 'package:figure_collections_maps/model/list_positions.dart';
-import 'package:figure_collections_maps/model/position.dart';
+import 'package:figure_collections_maps/model/sticker.dart';
+import 'package:figure_collections_maps/service/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:figure_collections_maps/model/list_positions.dart';
 
 class Mapa extends StatefulWidget {
   const Mapa({Key? key}) : super(key: key);
 
   @override
-  State<Mapa> createState() => _MapaState();
+  _MapaState createState() => _MapaState();
 }
 
 class _MapaState extends State<Mapa> {
-  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
-
-  Position? position;
-  ListPositions? listPositions;
-
-  late CameraPosition _position;
+  late GoogleMapController mapController;
+  ListPersons? listPersons;
+  final Set<Marker> markers = new Set();
+  static const LatLng showLocation = const LatLng(-28.265327, -52.397575);
 
   @override
   void initState() {
     super.initState();
+    getPositions().then((dataResponse) {
+      setState(() {
+        listPersons = dataResponse;
+        for (var person in listPersons!.persons){
+          print(person.nome);
+          markers.add(Marker(
+            markerId: MarkerId(person.nome),
+            position: LatLng(person.lat, person.long),
+            infoWindow: InfoWindow(
+              title: person.nome,
+              snippet: 'Figuras: '+ person.total.toString(),
+              onTap: () {
+                Navigator.pushNamed(context, "/sticker",
+                    arguments: StickerArguments(person.nome, person.repeated));
+              },
+            ),
+            icon: BitmapDescriptor.defaultMarker,
+          ));
+        }
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (ModalRoute.of(context)!.settings.arguments is Position) {
-      position = ModalRoute.of(context)!.settings.arguments as Position?;
-    } else {
-      listPositions =
-          ModalRoute.of(context)!.settings.arguments as ListPositions?;
-    }
-    if (position != null) {
-      _position = CameraPosition(
-        target: LatLng(position!.lat, position!.lng),
-        zoom: 14.4746,
-      );
-    } else {
-      _position = CameraPosition(
-        target: LatLng(
-            listPositions!.positions[0].lat, listPositions!.positions[0].lng),
-        zoom: 18.4746,
-      );
-    }
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Figure Collections Maps"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.list_alt),
+            onPressed: () {
+              Navigator.pushNamed(context, "/peoples");
+            },
+          ),
+        ],
+      ),
       body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _position,
-        onMapCreated: _onMapCreated,
-        markers: Set<Marker>.of(markers.values),
+        //Map widget from google_maps_flutter package
+        zoomGesturesEnabled: true, //enable Zoom in, out on map
+        initialCameraPosition: const CameraPosition(
+          //innital position in map
+          target: showLocation, //initial position
+          zoom: 15.0, //initial zoom level
+        ),
+        markers: markers, //markers to show on map
+        mapType: MapType.normal, //map type
+        onMapCreated: (controller) {
+          //method called when map is created
+          setState(() {
+            mapController = controller;
+          });
+        },
       ),
     );
   }
 
-  Future<void> _onMapCreated(GoogleMapController controller) async {
-    if (position != null) {
-      final marker = Marker(
-        markerId: MarkerId(position!.veiculo_placa ?? ""),
-        position: LatLng(position!.lat, position!.lng),
-      );
-      markers[marker.markerId] = marker;
-    } else {
-      List<LatLng> latLngs = [];
-      for (final position in listPositions!.positions) {
-        LatLng latLng = LatLng(position.lat, position.lng);
-        latLngs.add(latLng);
-        final marker = Marker(
-          markerId: MarkerId(position.veiculo_placa),
-          position: latLng,
-          infoWindow: InfoWindow(
-            title: position.veiculo_placa,
-            snippet: position.condutor_nome,
-          ),
-        );
-        markers[marker.markerId] = marker;
-      }
-      //como deixar todos markers visíveis
-      LatLngBounds bounds = boundsFromLatLngList(latLngs);
-      controller.animateCamera(
-        CameraUpdate.newLatLngBounds(bounds, 45.0),
-      );
-    }
-
-    setState(() {});
-  }
-
-  LatLngBounds boundsFromLatLngList(List<LatLng> list) {
-    double? x0, x1, y0, y1;
-    for (LatLng latLng in list) {
-      if (x0 == null) {
-        x0 = x1 = latLng.latitude;
-        y0 = y1 = latLng.longitude;
-      } else {
-        if (latLng.latitude > x1!) x1 = latLng.latitude;
-        if (latLng.latitude < x0) x0 = latLng.latitude;
-        if (latLng.longitude > y1!) y1 = latLng.longitude;
-        if (latLng.longitude < y0!) y0 = latLng.longitude;
-      }
-    }
-    return LatLngBounds(
-        northeast: LatLng(x1!, y1!), southwest: LatLng(x0!, y0!));
-  }
 }

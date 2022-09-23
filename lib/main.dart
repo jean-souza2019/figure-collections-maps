@@ -1,4 +1,5 @@
-import 'package:figure_collections_maps/screens/list_vehicles.dart';
+import 'package:figure_collections_maps/screens/list_peoples.dart';
+import 'package:figure_collections_maps/screens/list_sticker_people.dart';
 import 'package:figure_collections_maps/screens/our_map.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +17,9 @@ class MainScreen extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const ListVehicles(),
-        '/mapa': (context) => const Mapa(),
+        '/': (context) => const Mapa(),
+        '/peoples': (context) => const ListPeoples(),
+        '/sticker': (context) => const ListStickerPeople(),
       },
     );
   }
