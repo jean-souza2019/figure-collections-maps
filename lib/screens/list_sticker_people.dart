@@ -11,21 +11,28 @@ class ListStickerPeople extends StatelessWidget {
     TextStyle style27dp = const TextStyle(fontSize: 27);
 
     return Scaffold(
-      appBar: AppBar(title: Text("Figures of " + args.nome)),
+      appBar: AppBar(title: Text("Figures of " + args.nome),actions: [
+        IconButton(
+          icon: const Icon(Icons.chat),
+          onPressed: () {
+            Navigator.pushNamed(context, "/chat");
+          },
+        ),
+      ],),
       body: ListView(
         padding: const EdgeInsets.all(8),
         children: <Widget>[
           Center(
               child: new Text(
-            args.nome,
-            style: style27dp,
-          )),
+                args.nome,
+                style: style27dp,
+              )),
           for (var repeated in args.repeated)
             Center(
                 child: new Text(
-              repeated,
-              style: style20dp,
-            ))
+                  repeated,
+                  style: style20dp,
+                ))
         ],
       ),
     );
