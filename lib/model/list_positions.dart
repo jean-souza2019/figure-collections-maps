@@ -8,8 +8,6 @@ class ListPersons {
   ListPersons.fromJson(Map<String, dynamic> json)
       : persons = buildListPersons(json['data']);
 
-  //javascript = arrow function
-  //java = lambda
   static List<Person> buildListPersons(List<dynamic> list) =>
       list.map((item) => Person.fromJson(item)).toList();
 }

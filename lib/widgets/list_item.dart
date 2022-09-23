@@ -26,8 +26,8 @@ class _ListItemPersonState extends State<ListItemPerson> {
   }
 
   getAddress() async {
-    List<Placemark> listPlacemarks = await placemarkFromCoordinates(
-        widget.person.lat, widget.person.long);
+    List<Placemark> listPlacemarks =
+        await placemarkFromCoordinates(widget.person.lat, widget.person.long);
     setState(() {
       placemark = listPlacemarks[0];
     });
@@ -36,19 +36,6 @@ class _ListItemPersonState extends State<ListItemPerson> {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      endActionPane: ActionPane(
-        motion: const ScrollMotion(),
-        children: [
-          SlidableAction(
-            flex: 2,
-            onPressed: doNothing,
-            backgroundColor: Colors.lightBlue,
-            foregroundColor: Colors.white,
-            icon: Icons.archive,
-            label: 'Comandos',
-          ),
-        ],
-      ),
       child: InkWell(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -58,26 +45,24 @@ class _ListItemPersonState extends State<ListItemPerson> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.person.nome.trim(),
-                        style: style27dp),
-                    Text(
+                    Center(
+                        child:
+                            Text(widget.person.nome.trim(), style: style27dp)),
+                    Center(
+                        child: Text(
                       placemark == null
                           ? "Buscando endereço..."
                           : getFormattedAddress(),
                       style: style15dp,
                       softWrap: false,
                       overflow: TextOverflow.ellipsis,
-                    ),
+                    )),
                   ],
                 ),
-              ),
-              const Icon(Icons.keyboard_arrow_right)
+              )
             ],
           ),
         ),
-        onTap: () {
-          Navigator.pushNamed(context, "/mapa", arguments: widget.person); // colocar outra tela
-        },
       ),
     );
   }

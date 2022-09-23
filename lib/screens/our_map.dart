@@ -36,7 +36,15 @@ class _MapaState extends State<Mapa> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
-        title: const Text("Mapa"),
+        title: const Text("Figure Collections Maps"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.list_alt),
+            onPressed: () {
+              Navigator.pushNamed(context, "/peoples");
+            },
+          ),
+        ],
       ),
       body: GoogleMap( //Map widget from google_maps_flutter package
         zoomGesturesEnabled: true, //enable Zoom in, out on map
@@ -104,7 +112,20 @@ class _MapaState extends State<Mapa> {
           title: 'José Henrique',
           snippet: 'Figuras: 247',
           onTap: () {
-            Navigator.pushNamed(context, "/");
+            Navigator.pushNamed(context, "/sticker", arguments: StickerArguments("José Henrique", [
+              "IRN13",
+              "IRN14",
+              "IRN17",
+              "IRN19",
+              "USA9",
+              "WAL9",
+              "WAL10",
+              "WAL20",
+              "ARG7",
+              "ARG16",
+              "KSA7",
+              "KSA14"
+            ] ));
           },
         ),
         icon: BitmapDescriptor.defaultMarker,
@@ -117,7 +138,14 @@ class _MapaState extends State<Mapa> {
           title: 'Diego Souza',
           snippet: 'Figuras: 320',
           onTap: () {
-            Navigator.pushNamed(context, "/");
+            Navigator.pushNamed(context, "/sticker", arguments: StickerArguments("Diego Souza", [
+              "ESP6",
+              "ESP8",
+              "CRC5",
+              "JPN4",
+              "JPN13",
+              "JPN18"
+            ] ));
           },
         ),
         icon: BitmapDescriptor.defaultMarker,
@@ -130,7 +158,18 @@ class _MapaState extends State<Mapa> {
           title: 'Jorge Neuman',
           snippet: 'Figuras: 437',
           onTap: () {
-            Navigator.pushNamed(context, "/");
+            Navigator.pushNamed(context, "/sticker", arguments: StickerArguments("Jorge Neuman", [
+              "BEL12",
+              "BEL15",
+              "CAN5",
+              "MAR3",
+              "BRA1",
+              "BRA9",
+              "SUI1",
+              "SUI11",
+              "SUI18",
+              "CMR8"
+            ] ));
           },
         ),
         icon: BitmapDescriptor.defaultMarker,
@@ -140,10 +179,10 @@ class _MapaState extends State<Mapa> {
         markerId: MarkerId(showLocation.toString()),
         position: const LatLng(-28.261585, -52.425827),
         infoWindow: InfoWindow(
-          title: 'Yuri Alberto',
+          title: 'Yuri Alberto2',
           snippet: 'Figuras: 120',
           onTap: () {
-            Navigator.pushNamed(context, "/sticker", arguments: StickerArguments("Yuri Alberto", [
+            Navigator.pushNamed(context, "/sticker", arguments: StickerArguments("Yuri Alberto2", [
               "BEL12",
               "BEL15",
               "CAN5",

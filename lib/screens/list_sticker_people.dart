@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class ListStickerPeople extends StatelessWidget {
   const ListStickerPeople({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as StickerArguments;
@@ -13,18 +12,23 @@ class ListStickerPeople extends StatelessWidget {
 
     print(args);
     return Scaffold(
-      appBar: AppBar(
-          title:Text("Figurinhas de " + args.nome)
-      ),
+      appBar: AppBar(title: Text("Figures of " + args.nome)),
       body: ListView(
         padding: const EdgeInsets.all(8),
         children: <Widget>[
-          Center(child: new Text(args.nome, style: style27dp,)),
-
-          for(var repeated in args.repeated ) Center(child: new Text(repeated, style: style20dp,))
+          Center(
+              child: new Text(
+            args.nome,
+            style: style27dp,
+          )),
+          for (var repeated in args.repeated)
+            Center(
+                child: new Text(
+              repeated,
+              style: style20dp,
+            ))
         ],
-    ),
-
+      ),
     );
   }
 }
