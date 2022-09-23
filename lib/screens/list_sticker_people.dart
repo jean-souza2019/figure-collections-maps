@@ -10,7 +10,6 @@ class ListStickerPeople extends StatelessWidget {
     TextStyle style20dp = const TextStyle(fontSize: 20);
     TextStyle style27dp = const TextStyle(fontSize: 27);
 
-    print(args);
     return Scaffold(
       appBar: AppBar(title: Text("Figures of " + args.nome)),
       body: ListView(
