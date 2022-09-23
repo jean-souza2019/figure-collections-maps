@@ -15,10 +15,10 @@ class MainScreen extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.deepOrange),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/mapa',
+      initialRoute: '/',
       routes: {
-        '/': (context) => const ListPeoples(),
-        '/mapa': (context) => const Mapa(),
+        '/': (context) => const Mapa(),
+        '/peoples': (context) => const ListPeoples(),
         '/sticker': (context) => const ListStickerPeople(),
       },
     );

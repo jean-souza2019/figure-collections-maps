@@ -29,15 +29,7 @@ class _ListPeoplesState extends State<ListPeoples> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Pessoas"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.map),
-            onPressed: () {
-              Navigator.pushNamed(context, "/mapa");
-            },
-          ),
-        ],
+        title: const Text("Registered Peoples"),
       ),
       body: listPersons == null
           ? const LinearProgressIndicator()
