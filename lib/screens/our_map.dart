@@ -24,7 +24,6 @@ class _MapaState extends State<Mapa> {
       setState(() {
         listPersons = dataResponse;
         for (var person in listPersons!.persons){
-          print(person.nome);
           markers.add(Marker(
             markerId: MarkerId(person.nome),
             position: LatLng(person.lat, person.long),
