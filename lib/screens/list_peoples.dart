@@ -37,7 +37,8 @@ class _ListPeoplesState extends State<ListPeoples> {
               itemBuilder: (context, index) =>
                   buildListItem(listPersons!.persons[index]),
               separatorBuilder: (context, index) => const Divider(height: 1),
-              itemCount: listPersons?.persons.length ?? 0),
+              itemCount: listPersons?.persons.length ?? 0,
+      ),
     );
   }
 

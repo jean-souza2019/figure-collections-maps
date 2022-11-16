@@ -47,32 +47,58 @@ class _MapaState extends State<Mapa> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Figure Collections Maps"),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            icon: const Icon(Icons.list_alt),
+            icon: const Icon(Icons.logout),
             onPressed: () {
-              Navigator.pushNamed(context, "/peoples");
+              showDialog(context: context, builder: (context) => AlertDialog(
+                title: const Text("Sair",
+                    style: TextStyle(color: Colors.black)),
+                content: const Text('Realmente deseja sair?', style: TextStyle(color: Colors.black)),
+                actions: [
+                  TextButton(onPressed: (){
+                    Navigator.of(context).pop();
+                  }, child: const Text('Não', style: TextStyle(color: Colors.black))),
+                  TextButton(onPressed: (){
+                    Navigator.pushNamed(context, "/");
+                  }, child: const Text("Sim", style: TextStyle(color: Colors.black)))
+                ],
+              ));
+
             },
           ),
         ],
       ),
-      body: GoogleMap(
-        //Map widget from google_maps_flutter package
-        zoomGesturesEnabled: true, //enable Zoom in, out on map
-        initialCameraPosition: const CameraPosition(
-          //innital position in map
-          target: showLocation, //initial position
-          zoom: 15.0, //initial zoom level
-        ),
-        markers: markers, //markers to show on map
-        mapType: MapType.normal, //map type
-        onMapCreated: (controller) {
-          //method called when map is created
-          setState(() {
-            mapController = controller;
-          });
-        },
-      ),
+      body: Stack(
+              alignment: AlignmentDirectional.topEnd,
+              children: [
+                GoogleMap(
+                zoomGesturesEnabled: true,
+                initialCameraPosition: const CameraPosition(
+                  target: showLocation,
+                  zoom: 15.0,
+                ),
+                markers: markers,
+                mapType: MapType.normal,
+                onMapCreated: (controller) {
+                  setState(() {
+                    mapController = controller;
+                  });
+                },
+              ),
+                Align(
+                    alignment: AlignmentDirectional.bottomStart,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: FloatingActionButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/peoples");
+                      }, child: Icon(Icons.people),
+                      ),
+                    )
+                )
+      ])
     );
   }
 
