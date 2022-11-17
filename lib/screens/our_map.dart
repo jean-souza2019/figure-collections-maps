@@ -1,8 +1,11 @@
+import 'package:figure_collections_maps/model/persons.dart';
 import 'package:figure_collections_maps/model/sticker.dart';
+import 'package:figure_collections_maps/providers/GeneralProvider.dart';
 import 'package:figure_collections_maps/service/endpoints.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:figure_collections_maps/model/list_positions.dart';
+import 'package:provider/provider.dart';
 
 class Mapa extends StatefulWidget {
   const Mapa({Key? key}) : super(key: key);
@@ -44,6 +47,13 @@ class _MapaState extends State<Mapa> {
 
   @override
   Widget build(BuildContext context) {
+    // String teste = Provider.of<GeneralProvider>(conListPersonsn: false).listCoffe() as String;
+    List<Person> persons = Provider.of<GeneralProvider>(context, listen: false).listPersons();
+
+    print("context aqui");
+    print(context);
+    print(persons[0].repeated);
+    print("final aqui");
     return Scaffold(
       appBar: AppBar(
         title: const Text("Figure Collections Maps"),
