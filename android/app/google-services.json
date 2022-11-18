@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "151525836410",
+    "project_id": "maps-1a75c",
+    "storage_bucket": "maps-1a75c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:151525836410:android:17b4f341349d7bb0d5ddc3",
+        "android_client_info": {
+          "package_name": "com.example.figure_collections_maps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "151525836410-1ealhjobt8ru62mn7cgiqvjol60l885l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxUHrV2pkGxEF7W5HbkmUtFJrDoNjpGOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "151525836410-1ealhjobt8ru62mn7cgiqvjol60l885l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "151525836410-1ggjp5crap48m2i1ohlc4kq4gdtbaifo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.figureCollectionsMaps"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
